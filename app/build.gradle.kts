@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 plugins {
-    id("com.android.application")
-    id("com.google.devtools.ksp") version "1.9.0-1.0.13"
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.google.ksp)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -50,13 +50,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
     packaging {
         resources {
@@ -67,16 +67,35 @@ android {
 
 dependencies {
 
-    implementation(platform("androidx.compose:compose-bom:2023.05.01"))
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.navigation:navigation-compose:${rootProject.extra["nav_version"]}")
+    // Import the Compose BOM
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.bundles.androidx)
 
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation(libs.bundles.room)
+    ksp(libs.androidx.room.compiler)
+    annotationProcessor(libs.androidx.room.compiler)
+
+    androidTestImplementation(libs.bundles.test)
+
+//    implementation(libs.androidx.activity.compose)
+//    implementation(libs.androidx.material3)
+//    implementation(libs.androidx.ui)
+//    implementation(libs.androidx.ui.tooling)
+//    implementation(libs.androidx.ui.tooling.preview)
+//    implementation(libs.androidx.lifecycle.runtime.ktx)
+//    implementation(libs.androidx.lifecycle.viewmodel.compose)
+//    implementation(libs.androidx.navigation.compose)
+//
+//    debugImplementation(libs.androidx.ui.test.manifest)
+//    debugImplementation(libs.ui.tooling)
+//
+//    //Room
+//    implementation(libs.androidx.room.runtime)
+//    implementation(libs.androidx.core.ktx)
+
+//    implementation(libs.androidx.room.ktx)
+//
+//    // Testing
+//    androidTestImplementation(libs.androidx.espresso.core)
+//    androidTestImplementation(libs.androidx.junit)
 }
