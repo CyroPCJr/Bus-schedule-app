@@ -4,7 +4,7 @@ import android.app.Application
 import com.example.busschedule.data.AppContainer
 import com.example.busschedule.data.AppDataContainer
 
-class BusScheduleApplication: Application() {
+class BusScheduleApplication : Application() {
 
     lateinit var container: AppContainer
 

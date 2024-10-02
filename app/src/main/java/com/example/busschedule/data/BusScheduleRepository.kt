@@ -6,11 +6,5 @@ interface BusScheduleRepository {
 
     fun getAllSchedules(): Flow<List<BusSchedule>>
 
-    fun getSchedule(id: Int): Flow<BusSchedule>
-
-    suspend fun insert(busSchedule: BusSchedule)
-
-    suspend fun update(busSchedule: BusSchedule)
-
-    suspend fun delete(busSchedule: BusSchedule)
+    fun getSchedule(stopName: String): Flow<List<BusSchedule>>
 }

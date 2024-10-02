@@ -28,9 +28,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Divider
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -72,7 +72,7 @@ enum class BusScheduleScreens {
 
 @Composable
 fun BusScheduleApp(
-    viewModel: BusScheduleViewModel = viewModel(factory = BusScheduleViewModel.factory)
+    viewModel: BusScheduleViewModel = viewModel(factory = BusScheduleViewModel.factory),
 ) {
     val navController = rememberNavController()
     val fullScheduleTitle = stringResource(R.string.full_schedule)
@@ -148,7 +148,7 @@ fun RouteScheduleScreen(
     busSchedules: List<BusSchedule>,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    onBack: () -> Unit = {}
+    onBack: () -> Unit = {},
 ) {
     BackHandler { onBack() }
     BusScheduleScreen(
@@ -187,14 +187,13 @@ fun BusScheduleScreen(
                     bottom = dimensionResource(R.dimen.padding_medium),
                     start = dimensionResource(R.dimen.padding_medium),
                     end = dimensionResource(R.dimen.padding_medium),
-                )
-            ,
+                ),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(stopNameText)
             Text(stringResource(R.string.arrival_time))
         }
-        Divider()
+        HorizontalDivider()
         BusScheduleDetails(
             contentPadding = PaddingValues(
                 bottom = contentPadding.calculateBottomPadding()
@@ -216,7 +215,7 @@ fun BusScheduleDetails(
     busSchedules: List<BusSchedule>,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    onScheduleClick: ((String) -> Unit)? = null
+    onScheduleClick: ((String) -> Unit)? = null,
 ) {
     LazyColumn(
         modifier = modifier,
@@ -275,7 +274,7 @@ fun BusScheduleTopAppBar(
     title: String,
     canNavigateBack: Boolean,
     onBackClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     if (canNavigateBack) {
         TopAppBar(
@@ -283,7 +282,7 @@ fun BusScheduleTopAppBar(
             navigationIcon = {
                 IconButton(onClick = onBackClick) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(
                             R.string.back
                         )
